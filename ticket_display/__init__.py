@@ -2,9 +2,11 @@ import os
 
 import pickle
 from flask import Flask
+from flask_cors import CORS
 
 def create_app(test_config=None):
     app = Flask(__name__, instance_relative_config=True)
+    CORS(app)
     app.config.from_mapping(
         SECRET_KEY="dev",
         DATABASE=os.path.join(app.instance_path, 'flaskr.sqlite'),
@@ -28,9 +30,20 @@ def create_app(test_config=None):
         work_id_path = f'{cwd}\\pickle_dump\\w{date}.p'
 
         response_dict = pickle.load(open(response_path,'rb'))
-        work_id_path = pickle.load(open(work_id_path, 'rb'))
+        work_id = pickle.load(open(work_id_path, 'rb'))
 
-        return f'{str(response_dict)} -|- {str(work_id_path)}'
+        for work_id_num in response_dict:
+            for ticket_num in response_dict[work_id_num]:
+                for x, row in enumerate(response_dict[work_id_num][ticket_num]):
+                    for y, item in enumerate(row):
+                        response_dict[work_id_num][ticket_num][x][y] = item.replace(",","")
+                
+
+        work_ids = []
+        for item in work_id:
+            work_ids.append(int(item))
+
+        return f'{str(response_dict)} xyzxyz {str(work_id)} abcabc {str(work_ids)}'
 
 
     return app

@@ -1,0 +1,44 @@
+.sidebar {
+    height: 100%;
+    width: 30px;
+    /* background-color: gray; */
+    /* position: fixed; */
+    overflow-x: hidden;
+    margin-top: 10%;
+    grid-column: 1;
+    grid-row: 1;
+}
+
+.sidebar a {
+    text-decoration: none;
+    color: black;
+    text-align: center;
+}
+
+.sidebar a div {
+    background-color: gray;
+}
+
+.sidebar div:hover {
+    background-color: black;
+    color:white;
+}
+
+.tickets {
+    /* margin-left: 160px; */
+    margin-top: 2vh;
+    grid-column: 2;
+    grid-row: 1;
+}
+
+.responses {
+    grid-column: 3;
+    margin-top: 2vh;
+    grid-row: 1;
+}
+
+.grid-container {
+    display: grid;
+    grid-template-columns: 3;
+    grid-template-rows: 1;
+}
