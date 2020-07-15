@@ -37,6 +37,13 @@ def create_app(test_config=None):
                 for x, row in enumerate(response_dict[work_id_num][ticket_num]):
                     for y, item in enumerate(row):
                         response_dict[work_id_num][ticket_num][x][y] = item.replace(",","")
+                        if item.replace(",","") == "No Response Current":
+                            response_dict[work_id_num][ticket_num][x][y] = "No Response"
+                        if 'gray-primary-text">Respondant' in item:
+                            response_dict[work_id_num][ticket_num][x][y] = "PRAC"
+                        if y == 2:
+                            if item.find("-") != -1:
+                                response_dict[work_id_num][ticket_num][x][y] = item[:item.find("-")-1]
                 
 
         work_ids = []

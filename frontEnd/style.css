@@ -1,7 +1,12 @@
+html {
+    font-family: 'Roboto', sans-serif;
+    background-color: gray;
+}
+
 .sidebar {
     height: 100%;
-    width: 30px;
-    /* background-color: gray; */
+    width: 5vw;
+    background-color: black;
     /* position: fixed; */
     overflow-x: hidden;
     margin-top: 10%;
@@ -11,17 +16,17 @@
 
 .sidebar a {
     text-decoration: none;
-    color: black;
+    color: white;
     text-align: center;
 }
 
 .sidebar a div {
-    background-color: gray;
+    background-color: black;
 }
 
 .sidebar div:hover {
     background-color: black;
-    color:white;
+    color:red;
 }
 
 .tickets {
@@ -41,4 +46,113 @@
     display: grid;
     grid-template-columns: 3;
     grid-template-rows: 1;
+}
+
+#responseTable {
+    width: 70vw;
+    /* text-align: center; */
+}
+
+table td {
+    height: 5vh;
+}
+
+.tab0 {
+    width: 20%;
+    text-align: right;
+}
+
+.tab1 {
+    width: 40%;
+    text-align: left;
+}
+
+.tab2 {
+    width: 20%;
+    text-align: right;
+}
+
+.tab3 {
+    width: 20%;
+    text-align: center;
+}
+
+.c1 {
+    background-color: lightgreen;
+}
+
+.c5 {
+    background-color: lightgreen;
+}
+
+.c4 {
+    background-color: lightgreen;
+}
+
+.c3U {
+    background-color: lightcoral;
+}
+
+.c8 {
+    background-color: yellow;
+}
+
+.c2E {
+    background-color: lightgreen;
+}
+
+.c6A {
+    background-color: lightcoral;
+}
+
+.c-1 {
+    background-color: orange;
+}
+
+.c3F {
+    background-color: lightcoral;
+}
+
+.c2A {
+    background-color: lightgreen;
+}
+
+.c2B {
+    background-color: lightgreen;
+}
+
+.c9Z {
+    background-color: lightgreen;
+}
+
+.c5 {
+    background-color: lightgreen;
+}
+
+.c3M {
+    background-color: lightcoral;
+}
+
+.c2E {
+    background-color: lightgreen;
+}
+
+.ticket {
+    text-decoration: none;
+    /* color:green; */
+    margin: 1.5vh;
+    margin-left: 0px;
+    margin-right: 10vw;
+    text-align: center;
+    text-underline-position: above;
+}
+
+#tickets a {
+    text-decoration: none;
+    font-weight: 500;
+    color: black;
+}
+
+#tickets a:hover {
+    color: white;
 }

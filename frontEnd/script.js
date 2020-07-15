@@ -52,7 +52,7 @@ function updateTickets(ticketList) {
     finalHTML = "";
     for(i=0; i<ticketList.length; i++) {
         finalHTML += `<a href="#" onclick="getResponseCommand(${ticketList[i]})">`;
-        finalHTML += `<div id="t${ticketList[i]}">${ticketList[i]}</div>`;
+        finalHTML += `<div id="t${ticketList[i]}" class="ticket">${ticketList[i]}</div>`;
         finalHTML += `</a>`;
     }
     ticketsElement.innerHTML = finalHTML;
@@ -120,18 +120,34 @@ function getTickets(workID, bulkData) {
 
 }
 
+function getCodeFromResponse(response) {
+    // i'm adding code assuming that there is a space at the start
+    // keep this in mind when you change shit inevitably
+
+    if(response === ` ''`) {
+        return -1;
+    }
+
+    let ind = response.search(":");
+    return response.slice(2, ind);
+}
+
 function updateResponses(responses) {
     let responseElement = document.getElementById('responses');
     let i,j;
 
-    finalHTML = "";
+    let finalHTML = "";
+    finalHTML += `<table id="responseTable">`;
+    finalHTML += `<tr><th class="tab1">Utility</th><th class="tab2">Response</th><th class="tab3">Notes</th>`;
     for(i=0; i<responses.length; i++) {
-        finalHTML += "<p>";
-        for(j=0; j<responses[i].length; j++) {
-            finalHTML += `||i: ${i} j: ${j} ${responses[i][j]}||`;
+        finalHTML += "<tr>";
+        let rowCode = getCodeFromResponse(responses[i][2]);
+        for(j=1; j<responses[i].length; j++) {
+            finalHTML += `<td class="tab${j} c${rowCode}">${responses[i][j].replaceAll(`'`,"")}</td>`;
         }
-        finalHTML += "</p>";
+        finalHTML += "</tr>";
     }
+    finalHTML += `</table>`;
     responseElement.innerHTML = finalHTML;
 }
 
@@ -159,6 +175,9 @@ function getResponse(ticketNumber, bulkData) {
 function getTicketsCommand(workID) {
     httpTICKETS.open("GET", displayURL+dateStr);
     httpTICKETS.send();
+
+    // let responseElement = document.getElementById('responses');
+    // responseElement.innerHTML = "";
 
     httpTICKETS.onreadystatechange=(e)=> {
         let ticketList = getTickets(workID, httpTICKETS.responseText);
