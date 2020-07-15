@@ -5,13 +5,13 @@ html {
 
 .sidebar {
     height: 100%;
-    width: 5vw;
+    width: 10vw;
     background-color: black;
-    /* position: fixed; */
+    position: fixed;
     overflow-x: hidden;
-    margin-top: 10%;
+    margin-top: 7vh;
     grid-column: 1;
-    grid-row: 1;
+    grid-row: 2;
 }
 
 .sidebar a {
@@ -31,26 +31,73 @@ html {
 
 .tickets {
     /* margin-left: 160px; */
-    margin-top: 2vh;
+    margin-top: 0vh;
+    margin-left: 10vw;
+    margin-right: 0;
+    width: 1vw;
     grid-column: 2;
+    grid-row: 2;
+    /* width: 100%; */
+    /* text-align: right; */
+}
+
+
+
+.ticketBar {
+    grid-column: 3;
     grid-row: 1;
 }
 
+.workIDBar {
+    grid-column:1;
+    grid-row: 1;
+}
+
+.titleBar {
+    grid-column: 2;
+    grid-row: 1;
+    margin-left:2.5vw;
+    white-space: nowrap;
+}
+
+#workOrderTitle {
+    margin: none;
+    text-align: left;
+    /* background-color: white; */
+}
+
+#workIDNum {
+    /* margin: 100px; */
+    /* background-color: black; */
+    margin-bottom: 0px;
+}
+
+#ticketNum {
+    text-align: center;
+}
+
+
 .responses {
     grid-column: 3;
-    margin-top: 2vh;
-    grid-row: 1;
+    margin-top: 0;
+    grid-row: 2;
 }
 
 .grid-container {
     display: grid;
-    grid-template-columns: 3;
-    grid-template-rows: 1;
+    /* THIS RIGHT HERE MAN */
+    grid-template-columns: 2.5% 35% 62.5%;
+    grid-template-rows: 2;
+
 }
 
 #responseTable {
-    width: 70vw;
+    width: 100%;
     /* text-align: center; */
+}
+
+#responseTable th {
+    background-color: rgb(95, 93, 95);
 }
 
 table td {
@@ -72,10 +119,10 @@ table td {
     text-align: right;
 }
 
-.tab3 {
+/* .tab3 {
     width: 20%;
     text-align: center;
-}
+} */
 
 .c1 {
     background-color: lightgreen;
@@ -99,6 +146,10 @@ table td {
 
 .c2E {
     background-color: lightgreen;
+}
+
+.c3R {
+    background-color: lightcoral;
 }
 
 .c6A {
@@ -137,6 +188,14 @@ table td {
     background-color: lightgreen;
 }
 
+.c2C {
+    background-color: lightgreen;
+}
+
+.c3P {
+    background-color: lightcoral;
+}
+
 .ticket {
     text-decoration: none;
     /* color:green; */
@@ -145,14 +204,20 @@ table td {
     margin-right: 10vw;
     text-align: center;
     text-underline-position: above;
+    /* background-color: red; */
 }
 
 #tickets a {
     text-decoration: none;
     font-weight: 500;
     color: black;
+    text-align: center;
 }
 
 #tickets a:hover {
     color: white;
+}
+
+canvas {
+    /* background-color: white; */
 }

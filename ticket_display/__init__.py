@@ -28,9 +28,11 @@ def create_app(test_config=None):
         cwd = os.getcwd()
         response_path = f'{cwd}\\pickle_dump\\r{date}.p'
         work_id_path = f'{cwd}\\pickle_dump\\w{date}.p'
+        work_id_titles_path = f'{cwd}\\pickle_dump\\t{date}.p'
 
         response_dict = pickle.load(open(response_path,'rb'))
         work_id = pickle.load(open(work_id_path, 'rb'))
+        work_id_titles = pickle.load(open(work_id_titles_path, 'rb'))
 
         for work_id_num in response_dict:
             for ticket_num in response_dict[work_id_num]:
@@ -50,7 +52,11 @@ def create_app(test_config=None):
         for item in work_id:
             work_ids.append(int(item))
 
-        return f'{str(response_dict)} xyzxyz {str(work_id)} abcabc {str(work_ids)}'
+        work_id_titles_output_str = ""
+        for elem in work_id_titles:
+            work_id_titles_output_str += f">>{elem}:{work_id_titles[elem]}<<"
+
+        return f'{str(response_dict)} xyzxyz {str(work_id)} abcabc {str(work_ids)} zapzap {str(work_id_titles_output_str)}'
 
 
     return app
