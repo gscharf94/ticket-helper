@@ -26,9 +26,17 @@ def create_app(test_config=None):
     @app.route('/display/<date>')
     def display(date):
         cwd = os.getcwd()
-        response_path = f'{cwd}\\pickle_dump\\r{date}.p'
-        work_id_path = f'{cwd}\\pickle_dump\\w{date}.p'
-        work_id_titles_path = f'{cwd}\\pickle_dump\\t{date}.p'
+        try:
+            import win32api
+            response_path = f'{cwd}\\pickle_dump\\r{date}.p'
+            work_id_path = f'{cwd}\\pickle_dump\\w{date}.p'
+            work_id_titles_path = f'{cwd}\\pickle_dump\\t{date}.p'
+        
+        except:
+            response_path = f'{cwd}/pickle_dump/r{date}.p'
+            work_id_path = f'{cwd}/pickle_dump/w{date}.p'
+            work_id_titles_path = f'{cwd}/pickle_dump/t{date}.p'
+
 
         response_dict = pickle.load(open(response_path,'rb'))
         work_id = pickle.load(open(work_id_path, 'rb'))
