@@ -321,7 +321,7 @@ function getResponse(ticketNumber, bulkData) {
 
 function updatePrintLink(workID) {
     let iconEle = document.getElementById("printLink");
-    iconEle.href = `prints/${workID} prints.pdf`;
+    iconEle.href = `prints/${workID}prints.pdf `;
 }
 
 function getTicketsCommand(workID) {
