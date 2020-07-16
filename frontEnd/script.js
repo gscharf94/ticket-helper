@@ -3,8 +3,8 @@ const httpWORKIDS = new XMLHttpRequest();
 const httpRESPONSES = new XMLHttpRequest();
 const httpTICKBOX = new XMLHttpRequest();
 
-const displayURL = "http://127.0.0.1:5000/display/"
-// const displayURL = "http://locate-helper.herokuapp.com/display/"
+// const displayURL = "http://127.0.0.1:5000/display/"
+const displayURL = "http://locate-helper.herokuapp.com/display/"
 
 
 Number.prototype.pad = function(len) {
@@ -319,6 +319,11 @@ function getResponse(ticketNumber, bulkData) {
     return responses.splitEveryN(4);
 }
 
+function updatePrintLink(workID) {
+    let iconEle = document.getElementById("printLink");
+    iconEle.href = `prints/${workID} prints.pdf`;
+}
+
 function getTicketsCommand(workID) {
     httpTICKETS.open("GET", displayURL+dateStr);
     httpTICKETS.send();
@@ -331,6 +336,7 @@ function getTicketsCommand(workID) {
         let title = getTitle(workID, httpTICKETS.responseText);
         updateTickets(ticketList);
         updateTitle(workID, title);
+        updatePrintLink(workID);
     }
     // fillWorkOrders();
 

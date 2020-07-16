@@ -47,7 +47,47 @@ html {
 .ticketBar {
     grid-column: 3;
     grid-row: 1;
-    margin-top: 5vh;
+    /* margin-top: 5vh; */
+    /* display: flex; */
+    /* margin-right: auto; */
+    /* margin-left: auto; */
+}
+
+#downloadPrints {
+    color: white;
+    /* margin-right: 1.2ch; */
+    font-size: 1.15rem;
+    text-align: right;
+    width: 10ch;
+    /* background-color: black; */
+    grid-column: 2;
+    grid-row: 1;
+}
+
+#dIconContainer {
+    /* background: rgb(34, 34, 34); */
+    display: flex;
+    margin-left: auto;
+    margin-right: 0px;
+    padding-left: 50%;
+    /* background-color: black; */
+    align-items: center;
+    border-radius: 5px 5px;
+    /* width: 100%; */
+}
+
+#downloadIcon {
+    grid-column: 3;
+    width: 5ch;
+    margin-left: 1ch;
+    /* margin-left: auto; */
+    /* margin-right: 0px; */
+    background-color: lightblue;
+    border-radius: 50%;
+    padding: 5px;
+    box-shadow: 0 3px 5px black;
+    cursor: pointer;
+
 }
 
 .workIDBar {
@@ -108,6 +148,8 @@ html {
 #responseTable {
     width: 100%;
     /* text-align: center; */
+    position: relative;
+    bottom: 1vh;
 }
 
 #responseTable th {
@@ -249,3 +291,4 @@ canvas {
     color: white;
     padding-left: 7.5vw;
 }
+
