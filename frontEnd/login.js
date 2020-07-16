@@ -5,6 +5,8 @@ const URL = "http://127.0.0.1:5000/auth/"
 function updateHiddenMessage() {
     let messageEle = document.getElementById("hiddenMessage");
     messageEle.style.visibility = 'visible';
+    messageEle.style.opacity = "1";
+    messageEle.style.transition = "opacity 1s linear";
 }
 
 

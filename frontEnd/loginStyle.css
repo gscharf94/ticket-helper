@@ -132,7 +132,8 @@ h1 {
     left: 6.5ch;
     border-width: 3px;
     color: rgb(1, 1, 95);
-    font-weight: 400;    
+    font-weight: 400;
+    cursor: pointer;
 }
 
 #hiddenMessage {
@@ -140,6 +141,12 @@ h1 {
     margin-left: auto;
     display: block;
     text-align: center;
-    color: red;
+    color: white;
     visibility: hidden;
+    background-color: rgb(231, 53, 53);
+    padding: 5px;
+    width: 30ch;
+    transition: visibility 0s 1s, opacity 1s linear;
+    opacity: 0;
+    border-radius: 50px;
 }

@@ -33,9 +33,19 @@ Array.prototype.splitEveryN = function(n) {
 	return newArr;
 }
 
+String.prototype.replaceAll = function(a, b) {
+	let output = this;
+	let ind = output.indexOf(a);
+	while(ind !== -1) {
+		output = output.replace(a,b);
+		ind = output.indexOf(a);
+	}
+	return output;
+}
+
 const date = new Date();
-const dateStr = `${date.getFullYear()}-${(date.getMonth()+1).pad(1)}-${date.getDate()}`;
-// const dateStr = "2020-07-14"
+// const dateStr = `${date.getFullYear()}-${(date.getMonth()+1).pad(1)}-${date.getDate()}`;
+const dateStr = "2020-07-15"
 
 const CODES = {
     '-1':"orange",
@@ -109,14 +119,11 @@ function getTickCanvResponseData(ticks) {
         let greens = 0;
         for(let j=0; j < ticks.length; j++) {
             let responses = getResponse(ticks[j], httpResponse);
-            // console.log(`searching for canv: >${ticks[j]}< j: ${j}/${ticks.length}`);
             try {
                 var tCanv = document.getElementById(`canv${ticks[j]}`);
                 tCanv.width = responses.length * 10;
-                // console.log('good')
             }
             catch {
-                // console.log('error')
                 continue;
             }
             for(let i=0; i<responses.length; i++) {
@@ -129,7 +136,6 @@ function getTickCanvResponseData(ticks) {
                 }
             }
         }
-        // console.log(`total: ${total} greens: ${greens}`);
         drawTitleBox(total, greens);
     }
 }
@@ -138,7 +144,6 @@ function updateTickets(ticketList) {
     ticketsElement = document.getElementById('tickets');
     let i;
 
-    // console.log(ticketList);
 
     finalHTML = "";
     for(i=0; i<ticketList.length; i++) {
@@ -181,17 +186,8 @@ function getWorkIDs(bulkData) {
 
     }
 
-    // console.log(`ids: ${ids}`);
-    // console.log(`tit: ${ret}`);
     return [ids,ret];
 }
-
-
-{/* <a href="#" onclick="getTicketsCommand(230);"><div id="work230"> */}
-{/* <p>230</p> */}
-{/* </div></a> */}
-
-
 
 
 
@@ -284,15 +280,12 @@ function getResponseCommand(ticketNumber) {
 
     httpRESPONSES.onreadystatechange=(e)=> {
         let responses = getResponse(ticketNumber, httpRESPONSES.responseText);
-        console.log(`ticket num: ${ticketNumber}`);
-        console.log(`responses: ${responses}`);
         updateTicketNumber(ticketNumber);
         updateResponses(responses);
     }
 }
 
 function getTitle(workID, text) {
-    // console.log(`text 1: ${text}`)
     let ind = text.search("zapzap");
     text = text.slice(ind, text.length);
     
@@ -317,8 +310,6 @@ function getResponse(ticketNumber, bulkData) {
     // returns a 2d array
     // of responses for ticket number using data from heroku server
 
-    console.log(bulkData);
-    
     let ind = bulkData.search(ticketNumber)+12;
     let end = bulkData.slice(ind, bulkData.length).search("]]");
     let responses = bulkData.slice(ind, ind+end+2);
