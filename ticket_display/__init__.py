@@ -87,6 +87,20 @@ def create_app(test_config=None):
         return "bad"
 
 
+    @app.route('/printref')
+    def printref():
+        cwd = os.getcwd()
+        try:
+            import win32api
+            file_path = f'{cwd}\\printref\\ref.txt'
+        except:
+            file_path = f'{cwd}/printref/ref.txt'
+        
+        with open(file_path, 'r') as f:
+            text = f.read()
+        
+        return text
+
 
     return app
 

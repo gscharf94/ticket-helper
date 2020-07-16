@@ -2,10 +2,11 @@ const httpTICKETS = new XMLHttpRequest();
 const httpWORKIDS = new XMLHttpRequest();
 const httpRESPONSES = new XMLHttpRequest();
 const httpTICKBOX = new XMLHttpRequest();
+const httpPRINTREF = new XMLHttpRequest();
 
 // const displayURL = "http://127.0.0.1:5000/display/"
-const displayURL = "http://locate-helper.herokuapp.com/display/"
-
+const displayURL = "http://locate-helper.herokuapp.com/display/";
+const printRefURL = "http://locate-helper.herokuapp.com/printref/";
 
 Number.prototype.pad = function(len) {
     let orig = String(this);
