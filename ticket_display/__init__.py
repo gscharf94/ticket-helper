@@ -69,7 +69,10 @@ def create_app(test_config=None):
     @app.route('/auth/<username>/<password>')
     def auth(username, password):
         cwd = os.getcwd()
-        file_path = f'{cwd}\\auth\\users'
+        try:
+            file_path = f'{cwd}\\auth\\users'
+        except:
+            file_path = f'{cwd}/auth/users'
         with open(file_path,'r') as file:
             data = file.read()
 
