@@ -98,7 +98,7 @@ def create_app(test_config=None):
         
         with open(file_path, 'r') as f:
             text = f.read()
-        
+
         return text
 
 

@@ -6,7 +6,7 @@ const httpPRINTREF = new XMLHttpRequest();
 
 // const displayURL = "http://127.0.0.1:5000/display/"
 const displayURL = "http://locate-helper.herokuapp.com/display/";
-const printRefURL = "http://locate-helper.herokuapp.com/printref/";
+const printRefURL = "http://locate-helper.herokuapp.com/printref";
 
 Number.prototype.pad = function(len) {
     let orig = String(this);
@@ -320,9 +320,23 @@ function getResponse(ticketNumber, bulkData) {
     return responses.splitEveryN(4);
 }
 
-function updatePrintLink(workID) {
-    let iconEle = document.getElementById("printLink");
-    iconEle.href = `prints/${workID}prints.pdf `;
+function updatePrintLink(workID, type) {
+    let iconEle = document.getElementById('downloadIcon')
+    let labelEle = document.getElementById('downloadPrints');
+    let linkEle = document.getElementById("printLink");
+
+    if(type === null) {
+        labelEle.textContent = "Not Available";
+        iconEle.style.backgroundColor = 'lightcoral';
+        iconEle.style.color = "red";
+        iconEle.style.cursor = 'auto';
+    } else {
+        iconEle.style.backgroundColor = "lightblue";
+        iconEle.style.color = "darkblue";
+        iconEle.style.cursor = "pointer";
+        labelEle.textContent = "Download Prints";
+        linkEle.href = `prints/${workID}prints.${type} `;
+    }
 }
 
 function getTicketsCommand(workID) {
@@ -337,7 +351,7 @@ function getTicketsCommand(workID) {
         let title = getTitle(workID, httpTICKETS.responseText);
         updateTickets(ticketList);
         updateTitle(workID, title);
-        updatePrintLink(workID);
+        updatePrintsLink(workID);
     }
     // fillWorkOrders();
 
@@ -348,12 +362,41 @@ function getTicketsCommand(workID) {
 
 }
 
-
 function replaceDocument(itemID, text) {
     let p = document.getElementById(itemID);
     p.innerHTML = text;
 }
 
-fillWorkOrders();
+function findPrintRef(workID, refList) {
+    refList = refList.replaceAll("[","").replaceAll("]","").replaceAll('}','').replaceAll(`'`,'').replaceAll(' ','');
+    let split = refList.split(":");
+    let pdfs = split[1].split(',');
+    let pngs = split[2].split(',');
+    let jpgs = split[3].split(',');
 
-// getResponseCommand('182005955');
+    if(pdfs.indexOf(String(workID)) !== -1) {
+        return 'pdf';
+    } else if (pngs.indexOf(String(workID)) !== -1) {
+        return 'png';
+    } else if (jpgs.indexOf(String(workID)) !== -1) {
+        return 'jpg';
+    } else {
+        return null;
+    }
+}
+
+function updatePrintsLink(workID) {
+    httpPRINTREF.open('GET',printRefURL);
+    httpPRINTREF.send();
+
+    httpPRINTREF.onreadystatechange=(e)=> {
+        if(httpPRINTREF.readyState === 4) {
+            let refList = httpPRINTREF.responseText;
+            let type = findPrintRef(workID, refList);
+            console.log(`workID: ${workID} type: ${type}`);
+            updatePrintLink(workID, type);
+        }
+    }
+}
+
+fillWorkOrders();
