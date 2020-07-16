@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+        <title>Login -- Ticket Helper</title>
+
+        <link rel="stylesheet" href="loginStyle.css">
+    </head>
+    <body>
+        <div id="topDivContainer">
+            <img id="logo" src="images/logo.png">
+            <h1>Login</h1>
+        </div>
+        <div id="formContainer">
+            <form id="form">
+                <label class="usernameForm" id="usernameLabel" for="username">Username:</label>
+                <input class="usernameForm" type="text" id="usernameInput" name="username"><br>
+                <label class="passwordForm" id="passwordLabel" for="password">Password:</label>
+                <input class="passwordForm" type="password" id="passwordInput" name="password">
+            </form>
+            
+            <button id="loginButton" onclick="buttonCommand();">Login</button>
+        </div>
+        <div>
+            <h3 id="hiddenMessage">Credentials Invalid. Please try again.</h3>
+        </div>
+   
+   
+   
+        <script src="login.js"></script>
+    </body>
+</html>

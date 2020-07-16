@@ -34,8 +34,8 @@ Array.prototype.splitEveryN = function(n) {
 }
 
 const date = new Date();
-// const dateStr = `${date.getFullYear()}-${(date.getMonth()+1).pad(1)}-${date.getDate()}`;
-const dateStr = "2020-07-14"
+const dateStr = `${date.getFullYear()}-${(date.getMonth()+1).pad(1)}-${date.getDate()}`;
+// const dateStr = "2020-07-14"
 
 const CODES = {
     '-1':"orange",
@@ -47,7 +47,14 @@ const CODES = {
     "6A":"red",
     "3F":"red",
     "5":"green",
-    "9Z":"green"
+    "9Z":"green",
+    "3P":"red",
+    "2A":"green",
+    "2C":"green",
+    "3C":"red",
+    "2E":"green",
+    "2B":"green",
+    "3M":"red"
 }
 
 function getData(date) {
@@ -71,30 +78,59 @@ function drawBlock(tCanv, color, xPos) {
 
 }
 
+function drawTitleBox(total, greens) {
+    let tCanv = document.getElementById("titleCanv");
+    let ctx = tCanv.getContext('2d');
+
+    let width = tCanv.width/total;
+
+    for(i=0; i<total; i++) {
+        ctx.beginPath();
+        ctx.rect(i*width,0,width,10);
+        if(i<greens) {
+            ctx.fillStyle = "green";
+        } else {
+            ctx.fillStyle = "red";
+        }
+        ctx.fill();
+    }
+
+    let xyEle = document.getElementById("comparison");
+    xyEle.textContent = `${greens}/${total} ready`
+}
+
 function getTickCanvResponseData(ticks) {
     httpTICKBOX.open("GET", displayURL+dateStr);
     httpTICKBOX.send();
 
     httpTICKBOX.onreadystatechange=(e)=> {
         let httpResponse = httpTICKBOX.responseText;
+        let total = 0;
+        let greens = 0;
         for(let j=0; j < ticks.length; j++) {
             let responses = getResponse(ticks[j], httpResponse);
-            console.log(`searching for canv: >${ticks[j]}< j: ${j}/${ticks.length}`);
+            // console.log(`searching for canv: >${ticks[j]}< j: ${j}/${ticks.length}`);
             try {
                 var tCanv = document.getElementById(`canv${ticks[j]}`);
                 tCanv.width = responses.length * 10;
-                console.log('good')
+                // console.log('good')
             }
             catch {
-                console.log('error')
+                // console.log('error')
                 continue;
             }
             for(let i=0; i<responses.length; i++) {
                 let resCode = responses[i][2];
                 let shortResCode = getCodeFromResponse(resCode);
-                drawBlock(tCanv, CODES[shortResCode], i*10);          
+                drawBlock(tCanv, CODES[shortResCode], i*10);
+                total++;
+                if(CODES[shortResCode] == "green") {
+                    greens++;
+                }
             }
         }
+        // console.log(`total: ${total} greens: ${greens}`);
+        drawTitleBox(total, greens);
     }
 }
 
@@ -102,11 +138,13 @@ function updateTickets(ticketList) {
     ticketsElement = document.getElementById('tickets');
     let i;
 
+    // console.log(ticketList);
+
     finalHTML = "";
     for(i=0; i<ticketList.length; i++) {
         finalHTML += `<a href="#" id ="tick${ticketList[i]}" onclick="getResponseCommand(${ticketList[i]})">`;
         finalHTML += `<div id="t${ticketList[i]}" class="ticket"><p>${ticketList[i]}</p>`;
-        finalHTML += `<canvas id="canv${ticketList[i]}"width="100" height="15"></canvas></div>`;
+        finalHTML += `<canvas id="canv${ticketList[i]}" width="100" height="15"></canvas></div>`;
         finalHTML += `</a>`;
     }
     ticketsElement.innerHTML = finalHTML;
@@ -189,7 +227,6 @@ function getTickets(workID, bulkData) {
     let ind = bulkData.search("xyzxyz");
     let end = bulkData.search("abcabc");
     let ticketList = bulkData.slice(ind+7, end);
-
     ind = ticketList.search(`'${String(workID)}'`);
     ticketList = ticketList.slice(ind+7, ticketList.length);
     end  = ticketList.search("']");
@@ -199,6 +236,7 @@ function getTickets(workID, bulkData) {
     ticketList = ticketList.slice(1, ticketList.length - 1);
     ticketList = ticketList.replaceAll(" ","");
     ticketList = ticketList.replaceAll("'","");
+
 
     return ticketList.split(",");
 
@@ -246,6 +284,8 @@ function getResponseCommand(ticketNumber) {
 
     httpRESPONSES.onreadystatechange=(e)=> {
         let responses = getResponse(ticketNumber, httpRESPONSES.responseText);
+        console.log(`ticket num: ${ticketNumber}`);
+        console.log(`responses: ${responses}`);
         updateTicketNumber(ticketNumber);
         updateResponses(responses);
     }
@@ -264,14 +304,20 @@ function getTitle(workID, text) {
     return title.split(":")[1];
 }
 
-function updateTitle(title) {
+function updateTitle(workID, title) {
     let titleEle = document.getElementById('workOrderTitle');
     titleEle.textContent = title;
+
+    let numEle = document.getElementById("workIDNum");
+    numEle.textContent = workID;
+    
 }
 
 function getResponse(ticketNumber, bulkData) {
     // returns a 2d array
     // of responses for ticket number using data from heroku server
+
+    console.log(bulkData);
     
     let ind = bulkData.search(ticketNumber)+12;
     let end = bulkData.slice(ind, bulkData.length).search("]]");
@@ -291,7 +337,7 @@ function getTicketsCommand(workID) {
         let ticketList = getTickets(workID, httpTICKETS.responseText);
         let title = getTitle(workID, httpTICKETS.responseText);
         updateTickets(ticketList);
-        updateTitle(title);
+        updateTitle(workID, title);
     }
     // fillWorkOrders();
 

@@ -58,5 +58,21 @@ def create_app(test_config=None):
 
         return f'{str(response_dict)} xyzxyz {str(work_id)} abcabc {str(work_ids)} zapzap {str(work_id_titles_output_str)}'
 
+    @app.route('/auth/<username>/<password>')
+    def auth(username, password):
+        cwd = os.getcwd()
+        file_path = f'{cwd}\\auth\\users'
+        with open(file_path,'r') as file:
+            data = file.read()
+
+        data = data.split(",")
+
+        for item in data:
+            if username == item.split(":")[0] and password == item.split(":")[1]:
+                return "good"
+        
+        return "bad"
+
+
 
     return app

@@ -1,6 +1,6 @@
 html {
     font-family: 'Roboto', sans-serif;
-    background-color: gray;
+    background-color: rgb(48, 48, 48);
 }
 
 .sidebar {
@@ -31,6 +31,7 @@ html {
 
 .tickets {
     /* margin-left: 160px; */
+    /* background-color: gray; */
     margin-top: 0vh;
     margin-left: 10vw;
     margin-right: 0;
@@ -46,6 +47,7 @@ html {
 .ticketBar {
     grid-column: 3;
     grid-row: 1;
+    margin-top: 5vh;
 }
 
 .workIDBar {
@@ -63,17 +65,29 @@ html {
 #workOrderTitle {
     margin: none;
     text-align: left;
+    color: white;
+    font-weight: 400;
     /* background-color: white; */
+    margin-left: 4vw;
 }
 
 #workIDNum {
+    color: blueviolet;
+    font-weight: 400;
     /* margin: 100px; */
     /* background-color: black; */
     margin-bottom: 0px;
+    font-size: 3rem;
+    margin-top: 1vh; 
+    /* background-color: white; */
+    width: 8.5vw;
+    text-align: center;
+
 }
 
 #ticketNum {
     text-align: center;
+    color: white;
 }
 
 
@@ -196,6 +210,10 @@ table td {
     background-color: lightcoral;
 }
 
+.c3C {
+    background-color: lightcoral;
+}
+
 .ticket {
     text-decoration: none;
     /* color:green; */
@@ -210,14 +228,24 @@ table td {
 #tickets a {
     text-decoration: none;
     font-weight: 500;
-    color: black;
+    color: white;
     text-align: center;
 }
 
 #tickets a:hover {
-    color: white;
+    color: yellow;
 }
 
 canvas {
     /* background-color: white; */
+}
+
+#titleCanv {
+    padding-left: 7.5vw;
+    margin-top: 0px;
+}
+
+#comparison {
+    color: white;
+    padding-left: 7.5vw;
 }
