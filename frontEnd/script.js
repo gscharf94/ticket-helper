@@ -3,7 +3,9 @@ const httpWORKIDS = new XMLHttpRequest();
 const httpRESPONSES = new XMLHttpRequest();
 const httpTICKBOX = new XMLHttpRequest();
 
-const displayURL = "http://127.0.0.1:5000/display/"
+// const displayURL = "http://127.0.0.1:5000/display/"
+const displayURL = "https://locate-helper.herokuapp.com/display/"
+
 
 Number.prototype.pad = function(len) {
     let orig = String(this);

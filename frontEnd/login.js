@@ -1,5 +1,6 @@
 const HTTP = new XMLHttpRequest();
-const URL = "http://127.0.0.1:5000/auth/"
+// const URL = "http://127.0.0.1:5000/auth/"
+const URL = "https://locate-helper.herokuapp.com/auth/"
 
 
 function updateHiddenMessage() {
