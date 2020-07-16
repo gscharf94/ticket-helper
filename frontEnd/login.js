@@ -18,7 +18,7 @@ function authenticate(username, password) {
     HTTP.onreadystatechange=(e)=> {
         if(HTTP.responseText == "good") {
             console.log('GOOD TO GO');
-            let url = 'index.html';
+            let url = 'tickethelper.html';
             window.location.href = url;
         } else {
             console.log('NOPE');

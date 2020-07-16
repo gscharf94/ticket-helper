@@ -3,8 +3,8 @@ const httpWORKIDS = new XMLHttpRequest();
 const httpRESPONSES = new XMLHttpRequest();
 const httpTICKBOX = new XMLHttpRequest();
 
-// const displayURL = "http://127.0.0.1:5000/display/"
-const displayURL = "https://locate-helper.herokuapp.com/display/"
+const displayURL = "http://127.0.0.1:5000/display/"
+// const displayURL = "http://locate-helper.herokuapp.com/display/"
 
 
 Number.prototype.pad = function(len) {
@@ -47,7 +47,7 @@ String.prototype.replaceAll = function(a, b) {
 
 const date = new Date();
 // const dateStr = `${date.getFullYear()}-${(date.getMonth()+1).pad(1)}-${date.getDate()}`;
-const dateStr = "2020-07-15"
+const dateStr = "2020-07-16"
 
 const CODES = {
     '-1':"orange",
