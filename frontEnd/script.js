@@ -83,7 +83,16 @@ function getData(date) {
 }
 
 function updateTime() {
-    console.log('hello');
+    httpUPDATE.open('GET',updateURL);
+    httpUPDATE.send();
+
+    httpUPDATE.onreadystatechange=(e)=> {
+        if(httpUPDATE.readyState == 4) {
+            let res = httpUPDATE.responseText;
+            let ele = document.getElementById('updateText');
+            ele.textContent = `Last Updated: ${res}`;
+        }
+    }
 }
 
 function drawBlock(tCanv, color, xPos) {
@@ -406,3 +415,4 @@ function updatePrintsLink(workID) {
 }
 
 fillWorkOrders();
+updateTime();

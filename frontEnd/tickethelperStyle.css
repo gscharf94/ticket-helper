@@ -294,10 +294,7 @@ canvas {
 
 #updateText {
     color: yellow;
-    /* position: fixed; */
-    font-size: 2ch;
+    font-size: 1ch;
     text-align: center;
     margin-left: 3ch;
-    /* padding-left: 3ch; */
-    
 }
