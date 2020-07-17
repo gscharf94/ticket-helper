@@ -101,6 +101,20 @@ def create_app(test_config=None):
 
         return text
 
+    @app.route('/lastupdate')
+    def printupdate():
+        cwd = os.getcwd()
+        try:
+            import win32api
+            file_path = f'{cwd}\\last_update.txt'
+        except:
+            file_path = f'{cwd}/last_update.txt'
+
+        with open(file_path, 'r') as f:
+            text = f.read()
+
+        return text
+
 
     return app
 
