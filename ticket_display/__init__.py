@@ -54,11 +54,15 @@ def create_app(test_config=None):
                         if y == 2:
                             if item.find("-") != -1:
                                 response_dict[work_id_num][ticket_num][x][y] = item[:item.find("-")-1]
+
                 
 
         work_ids = []
         for item in work_id:
             work_ids.append(int(item))
+
+        work_ids.pop()
+        work_ids.insert(0, 232)
 
         work_id_titles_output_str = ""
         for elem in work_id_titles:
