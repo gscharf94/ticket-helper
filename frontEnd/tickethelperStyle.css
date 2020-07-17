@@ -292,3 +292,12 @@ canvas {
     padding-left: 7.5vw;
 }
 
+#updateText {
+    color: yellow;
+    /* position: fixed; */
+    font-size: 2ch;
+    text-align: center;
+    margin-left: 3ch;
+    /* padding-left: 3ch; */
+    
+}

@@ -3,10 +3,12 @@ const httpWORKIDS = new XMLHttpRequest();
 const httpRESPONSES = new XMLHttpRequest();
 const httpTICKBOX = new XMLHttpRequest();
 const httpPRINTREF = new XMLHttpRequest();
+const httpUPDATE = new XMLHttpRequest();
 
 // const displayURL = "http://127.0.0.1:5000/display/"
 const displayURL = "http://locate-helper.herokuapp.com/display/";
 const printRefURL = "http://locate-helper.herokuapp.com/printref";
+const updateURL = "http://locate-helper.herokuapp.com/lastupdate"
 
 Number.prototype.pad = function(len) {
     let orig = String(this);
@@ -47,8 +49,8 @@ String.prototype.replaceAll = function(a, b) {
 }
 
 const date = new Date();
-// const dateStr = `${date.getFullYear()}-${(date.getMonth()+1).pad(1)}-${date.getDate()}`;
-const dateStr = "2020-07-16"
+const dateStr = `${date.getFullYear()}-${(date.getMonth()+1).pad(1)}-${date.getDate()}`;
+// const dateStr = "2020-07-16"
 
 const CODES = {
     '-1':"orange",
@@ -78,6 +80,10 @@ function getData(date) {
         let ticketList = getTickets(206,http.responseText);
         updateTickets(ticketList);
     }
+}
+
+function updateTime() {
+    console.log('hello');
 }
 
 function drawBlock(tCanv, color, xPos) {
