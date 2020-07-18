@@ -61,8 +61,7 @@ def create_app(test_config=None):
         for item in work_id:
             work_ids.append(int(item))
 
-        work_ids.pop()
-        work_ids.insert(0, 232)
+        
 
         work_id_titles_output_str = ""
         for elem in work_id_titles:
