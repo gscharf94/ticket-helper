@@ -118,6 +118,20 @@ def create_app(test_config=None):
 
         return text
 
+    @app.route('/metadata/<date>/<workid>')
+    def metadata(date, workid):
+        cwd = os.getcwd()
+        try:
+            import win32api
+            file_path = f"{cwd}\\pickle_dump\\m{date}.p"
+        except:
+            file_path = f'{cwd}/pickle_dump/m{date}.p'
+
+        metadata = pickle.load(open(file_path, 'rb'))
+
+        return str(metadata[workid])
+        
+
 
     return app
 
