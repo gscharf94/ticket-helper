@@ -4,11 +4,13 @@ const httpRESPONSES = new XMLHttpRequest();
 const httpTICKBOX = new XMLHttpRequest();
 const httpPRINTREF = new XMLHttpRequest();
 const httpUPDATE = new XMLHttpRequest();
+const httpMETA = new XMLHttpRequest();
 
 // const displayURL = "http://127.0.0.1:5000/display/"
 const displayURL = "http://locate-helper.herokuapp.com/display/";
 const printRefURL = "http://locate-helper.herokuapp.com/printref";
-const updateURL = "http://locate-helper.herokuapp.com/lastupdate"
+const updateURL = "http://locate-helper.herokuapp.com/lastupdate";
+const metadataURL = "https://locate-helper.herokuapp.com/metadata/";
 
 Number.prototype.pad = function(len) {
     let orig = String(this);
@@ -367,6 +369,7 @@ function getTicketsCommand(workID) {
         updateTickets(ticketList);
         updateTitle(workID, title);
         updatePrintsLink(workID);
+        getMetadata(workID);
     }
     // fillWorkOrders();
 
@@ -413,6 +416,19 @@ function updatePrintsLink(workID) {
         }
     }
 }
+
+function getMetadata(workID) {
+    httpMETA.open('get',`${metadataURL}${dateStr}/${workID}`);
+    httpMETA.send();
+
+    httpMETA.onreadystatechange=(e)=> {
+        if(httpMETA.readyState === 4) {
+            let metadata = httpMETA.responseText;
+            console.log(metadata);
+        }
+    }
+}
+
 
 fillWorkOrders();
 updateTime();

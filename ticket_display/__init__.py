@@ -127,9 +127,15 @@ def create_app(test_config=None):
         except:
             file_path = f'{cwd}/pickle_dump/m{date}.p'
 
-        metadata = pickle.load(open(file_path, 'rb'))
+        metadata = pickle.load(open(file_path, 'rb'))[workid]
 
-        return str(metadata[workid])
+        output_str = ""
+        for ticket in metadata:
+            output_str += f".tick.{ticket}.Etick."
+            output_str += f".exp.{metadata[ticket]['expiration']}.Eexp."
+            output_str += f".txt.{metadata[ticket]['text']}.Etxt."
+
+        return output_str
         
 
 
